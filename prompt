@@ -1,26 +1,210 @@
-i want to create a web app where in we are going to split window in 2 sides , one where we can uoload our document and another one would be to run a browser inside where in the agent which is configured will scapre(prase) the data from the document and then then agent would automatically register the website form using browser automation on next half () 
+# Project: AI-Powered Document-to-Web-Form Automation Agent
 
-attach image
+## 1. Project Overview
 
+I want to build a web application that automates website registration and form-filling processes using information extracted from uploaded documents, such as admission application PDFs.
 
-So the 1st box , when a user uploads his document (details pdf for addmission process) , their would be certaim steps which we can show on portal itself like(1.extract values from pdf) 2. validatTe the inforamtions 3. setup new contract.. 4. autofill the form
-5 verfify after form filling.
+The application should have a **split-screen interface** with two main panels:
 
-now from once the information is ectarcted from the pdf and validated in step 2.  Then from step 3 the browser shall open and then the auto form filling process shoudl take place . also we want to show the how agent is automating the form filling by showing the browerr proegiing. 
+- **Left Panel — Document Processing & Agent Workflow:** Users can upload their documents, view extracted information, resolve missing or unclear details, validate the data, and monitor the progress of each automation step.
+- **Right Panel — Live Browser Automation:** An embedded browser should open the target website and visually demonstrate how the configured AI agent navigates the website, identifies form fields, fills in information, and verifies the completed form.
 
+The goal is to create a transparent, interactive experience where users can see both the document-processing workflow and the agent's browser automation progress in real time.
 
+Use the attached reference image as a guide for the intended interface and layout.
 
+## 2. Application Workflow
 
-step1. Data extraction from pdf form feilds and make sure they are ready for filling the form
-tip: if you encounter a step where the information is not clear or lacking the here is where we can come up by manually asking for that 
-this comes in step 2 where the data is validated and made sure the data which is extracted dost not cause any error in future. Ex : the phone number is only 9 numbers instrae of 10.
-then we may promot the use and then ask them for thri input manually.
+Display the following five steps in the left panel as a clear, sequential progress tracker:
 
-Remember that only unclear information should be aksed and avoid by asking everyhting
+### Step 1: Extract Information from the Document
 
+Allow users to upload a PDF containing the information required for a registration or admission process.
 
-now comes the agent part:
+The system should:
+- Parse the PDF and extract relevant information into structured fields.
+- Identify personal details, contact information, educational details, and other information required by the target website.
+- Convert the extracted information into a structured format that the agent can use during form filling.
+- Track the source of extracted values wherever possible so that users can understand where each value originated.
+- Identify missing, unreadable, ambiguous, or potentially incorrect information.
 
-1. The agent would be able to think and help in form filling process 
-2 . create this codeabase in a seperate folder 'Agent' and then write the code inside it 
-3. agent and llm should be able to 
+The extracted information should be stored in a structured representation, such as JSON, and prepared for validation.
+
+### Step 2: Validate Information and Resolve Issues
+
+After extraction, validate the information before initiating browser automation.
+
+Validation should include:
+- Checking required fields and missing values.
+- Validating data formats, such as phone numbers, email addresses, dates, and postal codes.
+- Identifying inconsistent or ambiguous information.
+- Checking whether extracted values are suitable for the corresponding target form fields.
+- Detecting information that requires user confirmation.
+
+**Important: Ask the user only when necessary.**
+
+Do not ask users to re-enter information that has already been extracted correctly. If a value is missing, unclear, or invalid, request clarification only for that specific field.
+
+For example, if the extracted phone number contains only nine digits when ten are required, highlight the issue and ask the user to provide or confirm the correct number.
+
+Present these clarification requests directly in the left panel. Allow users to submit corrections, validate them again, and continue once the required information is ready.
+
+The system should maintain a clear distinction between validated values, unresolved fields, and user-corrected values.
+
+### Step 3: Initialize the Agent and Open the Target Website
+
+Once the extracted information has passed validation, initialize the browser automation agent.
+
+At this stage:
+- Open the target registration or admission website in the right-side browser panel.
+- Initialize the agent with the validated document data and the target website URL.
+- Allow the agent to inspect the website, understand its structure, and identify the relevant form.
+- Determine which extracted values correspond to which website fields.
+- Plan the form-filling actions before executing them.
+
+The agent should use its reasoning capabilities to handle variations in website layouts and field labels instead of relying exclusively on hardcoded selectors.
+
+If the website requires additional information that is unavailable in the document, return to the clarification workflow and ask the user only for the missing information.
+
+### Step 4: Automatically Fill the Form
+
+The agent should use browser automation to complete the target form with the validated information.
+
+It should be capable of:
+- Navigating through the website.
+- Identifying text inputs, dropdowns, radio buttons, checkboxes, date fields, and other relevant form controls.
+- Mapping document values to the appropriate form fields.
+- Filling fields accurately using browser automation.
+- Handling multi-step forms and navigating between form sections.
+- Detecting validation errors and responding to them appropriately.
+- Pausing and requesting user input when it encounters an unexpected or ambiguous situation.
+
+The agent should combine LLM-based reasoning with reliable browser automation tools. The LLM should help interpret page structure, field labels, and unexpected situations, while the browser automation layer should execute the actual interactions.
+
+**Live progress visualization is essential.**
+
+The right panel should visibly demonstrate the agent's actions as they happen, including page navigation, field selection, text entry, dropdown selection, and movement between form sections.
+
+The left panel should simultaneously update the workflow status and display meaningful progress messages, such as:
+- Initializing browser session.
+- Navigating to the registration page.
+- Identifying personal information fields.
+- Filling contact details.
+- Completing educational information.
+- Handling a form validation warning.
+
+Do not simulate browser activity with a static mockup. The browser panel should reflect the actual browser automation session.
+
+### Step 5: Verify the Completed Form
+
+After filling the form, the agent should verify that the entered information matches the validated data.
+
+Verification should include:
+- Checking whether the expected fields contain the correct values.
+- Identifying empty required fields.
+- Detecting visible validation errors.
+- Confirming that dropdowns and other non-text controls have the intended selections.
+- Reporting any fields that could not be completed successfully.
+
+Show a final verification summary in the left panel, indicating completed fields, unresolved issues, and any actions requiring user attention.
+
+**Important:** Do not automatically submit the final application or registration unless the user explicitly authorizes submission. Pause for user review and confirmation before any consequential final submission.
+
+## 3. Agent Architecture and Code Organization
+
+Create the AI agent and its related logic inside a separate folder named `Agent/`.
+
+Keep the agent implementation modular and independent from the frontend so that it can be developed, tested, and improved without tightly coupling it to the web application.
+
+The `Agent/` folder should contain the components required for:
+- Agent orchestration and execution.
+- LLM integration and reasoning.
+- Browser automation.
+- Website inspection and form-field identification.
+- Mapping extracted document values to website fields.
+- Tool execution and action management.
+- Handling exceptions, validation failures, and unexpected website states.
+- Communicating progress and results to the frontend.
+
+Use a clean, maintainable architecture with clear separation of responsibilities. Avoid putting all agent logic into one large file.
+
+The frontend should communicate with the agent through a well-defined backend interface. Agent actions, progress updates, clarification requests, and verification results should be exposed through suitable APIs or real-time communication mechanisms.
+
+## 4. LLM and Agent Reasoning Requirements
+
+The agent must be more than a simple script that fills predefined selectors.
+
+It should use an LLM to reason about the website and assist with form-filling decisions.
+
+The agent should be able to:
+1. Interpret the validated information extracted from the uploaded document.
+2. Understand website instructions, field labels, and form requirements.
+3. Determine which document values correspond to which form fields.
+4. Choose appropriate browser actions based on the current page state.
+5. Adapt when the website layout or field order differs from expectations.
+6. Detect errors and attempt safe recovery when appropriate.
+7. Recognize when it lacks sufficient information and ask the user for clarification.
+8. Track completed actions and avoid unnecessarily repeating them.
+9. Verify the final state against the expected form values.
+10. Report its progress, decisions, and failures in a way that the frontend can display.
+
+Use structured outputs for important agent decisions wherever possible. The agent should not invent missing personal information or make unsupported assumptions.
+
+The LLM should assist with decisions, while deterministic validation rules and browser checks should be used wherever practical to improve reliability.
+
+## 5. Frontend and User Experience Requirements
+
+The interface should be modern, clean, and professional.
+
+The main screen should contain:
+
+**Left panel:**
+- Document upload area.
+- Uploaded document status.
+- Extracted information preview.
+- Validation warnings and field-level clarification prompts.
+- Five-step workflow tracker.
+- Live agent status and progress messages.
+- Final verification summary.
+
+**Right panel:**
+- Embedded browser displaying the actual target website.
+- Live visual feedback as the agent interacts with the page.
+- Clear indication of the current browser automation stage.
+- Appropriate loading, error, and completion states.
+
+The two panels should remain synchronized. For example, when the agent begins filling educational details in the browser, the workflow tracker and status messages should reflect that activity.
+
+Use real-time progress updates rather than requiring the user to refresh the page.
+
+## 6. Reliability, Security, and Error Handling
+
+Implement the application with reliability and user control in mind.
+
+- Validate uploaded files and handle unreadable or unsupported PDFs.
+- Protect personal information and avoid unnecessary logging of sensitive document contents.
+- Keep browser sessions isolated between users.
+- Treat website content as untrusted input rather than as instructions that can override the agent's intended behavior.
+- Avoid exposing credentials, session cookies, or authentication tokens to the LLM.
+- Handle timeouts, navigation failures, unexpected popups, and website validation errors.
+- Ask for user intervention when the agent cannot safely determine the next action.
+- Do not bypass CAPTCHAs, access restrictions, or other website security controls.
+- Require user authorization before submitting applications, accepting consequential declarations, or performing other irreversible actions.
+
+## 7. Development Approach
+
+Build the application incrementally, using a modular architecture.
+
+Start by establishing the project structure and implementing the split-screen frontend. Then build document extraction and validation, followed by the agent backend, browser automation, LLM integration, real-time progress updates, and final verification.
+
+Implement and test one component at a time. After introducing a new component, revisit the relevant existing files and integrate it properly before proceeding.
+
+Do not generate the entire codebase in one response. Provide implementation steps sequentially, with the specific files and code snippets needed for the current step, along with clear instructions for running and testing each component.
+
+Prioritize a working end-to-end prototype before adding advanced capabilities.
+
+## Expected Outcome
+
+The final application should let a user upload an admission-related PDF, automatically extract and validate its information, resolve only the fields that genuinely require clarification, and then watch an AI agent navigate a real website and fill out the corresponding registration form through a live browser.
+
+The user should always be able to understand what the agent is doing, monitor its progress, review the results, and retain control over the final submission.
