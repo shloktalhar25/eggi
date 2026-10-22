@@ -1,0 +1,849 @@
+/* ==========================================================================
+   AI Coworker Workflow Theme — Clean, Professional White Design
+   Exact match to user's reference screenshot
+   ========================================================================== */
+
+:root {
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Colors based on user screenshot */
+  --bg-page: #f9fafb;
+  --bg-white: #ffffff;
+  --bg-sidebar: #ffffff;
+
+  --border-light: #e5e7eb;
+  --border-card: #e5e7eb;
+  --border-active: #2563eb;
+  --border-complete: #10b981;
+
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --text-light: #9ca3af;
+
+  --navy-button: #1e293b;
+  --navy-button-hover: #0f172a;
+
+  --blue-primary: #2563eb;
+  --blue-subtle: #eff6ff;
+
+  --green-primary: #10b981;
+  --green-subtle: #ecfdf5;
+
+  --amber-primary: #f59e0b;
+  --amber-subtle: #fffbeb;
+
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  --shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  height: 100vh;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   Overall Layout (3 Columns: Sidebar + Main Workflow + Right Workspace)
+   ========================================================================== */
+.coworker-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: var(--bg-page);
+}
+
+/* 1. Left Nav Sidebar (Matches screenshot) */
+.coworker-sidebar {
+  width: 190px;
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 16px;
+  flex-shrink: 0;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.sidebar-link:hover {
+  background-color: #f3f4f6;
+  color: var(--text-primary);
+}
+
+.sidebar-link.active {
+  background-color: #f3f4f6;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.count-pill {
+  font-size: 11px;
+  background-color: #f1f5f9;
+  color: var(--text-muted);
+  padding: 1px 7px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.sidebar-divider {
+  height: 1px;
+  background-color: var(--border-light);
+  margin: 10px 0;
+}
+
+.link-coworker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.sidebar-footer {
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+}
+
+.sidebar-footer-text {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* 2. Main Middle Workspace */
+.coworker-main {
+  flex: 1.35;
+  background-color: var(--bg-page);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 480px;
+  border-right: 1px solid var(--border-light);
+}
+
+.top-header {
+  padding: 16px 28px;
+  background-color: var(--bg-white);
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.header-title {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.2px;
+}
+
+.doc-upload-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-page);
+  border: 1px solid var(--border-light);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.doc-upload-label:hover {
+  background: #f1f5f9;
+  color: var(--text-primary);
+}
+
+.main-body-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Workflow Steps Header */
+.steps-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.steps-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.steps-heading {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.2px;
+}
+
+.steps-progress-counter {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Step Cards Grid (2 rows x 3 columns - Exact match to screenshot!)
+   ========================================================================== */
+.step-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.step-card {
+  background-color: var(--bg-white);
+  border: 1.5px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-height: 82px;
+}
+
+.step-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: var(--shadow-hover);
+}
+
+/* Active Step (Card 2 in screenshot) */
+.step-card.active {
+  border-color: var(--border-active);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* Completed Step (Card 1 in screenshot) */
+.step-card.completed {
+  border-color: #d1fae5;
+  background-color: #ffffff;
+}
+
+/* Card Icons */
+.card-icon-wrap {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.icon-complete {
+  background-color: #10b981;
+  color: #ffffff;
+}
+
+.icon-active {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.icon-waiting {
+  background-color: transparent;
+  border: 1.5px solid #d1d5db;
+  color: #9ca3af;
+}
+
+/* Card Body */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.card-status {
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
+.status-complete {
+  color: #059669;
+}
+
+.status-ready {
+  color: #2563eb;
+}
+
+.status-waiting {
+  color: #9ca3af;
+}
+
+/* ==========================================================================
+   Joel & Coworker Chat Card (Exact match to screenshot!)
+   ========================================================================== */
+.coworker-chat-card {
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chat-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid #f3f4f6;
+  padding-bottom: 14px;
+}
+
+.chat-prompt-text {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  max-width: 440px;
+}
+
+.btn-continue-browser {
+  background-color: var(--navy-button);
+  color: #ffffff;
+  border: none;
+  padding: 9px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  box-shadow: var(--shadow-card);
+}
+
+.btn-continue-browser:hover {
+  background-color: var(--navy-button-hover);
+}
+
+.btn-continue-browser.running {
+  background-color: #64748b;
+  cursor: not-allowed;
+}
+
+/* Chat Conversation Flow */
+.chat-conversation {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chat-bubble {
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Dark Navy User Bubble (from screenshot) */
+.bubble-user {
+  background-color: #1e293b;
+  color: #ffffff;
+  align-self: flex-start;
+  font-weight: 500;
+  max-width: 90%;
+}
+
+/* Agent Response Bubble */
+.bubble-agent {
+  background-color: #f8fafc;
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  align-self: flex-start;
+  max-width: 95%;
+}
+
+.bubble-agent-text strong {
+  color: var(--text-primary);
+}
+
+/* Clarification Alert Box (When missing digits detected) */
+.chat-clarify-box {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.clarify-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 2px 6px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.clarify-question {
+  font-size: 12.5px;
+  color: #78350f;
+}
+
+.clarify-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.prefix {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.manual-input {
+  padding: 6px 10px;
+  border: 1.5px solid #d97706;
+  border-radius: var(--radius-sm);
+  font-size: 12.5px;
+  font-family: var(--font-mono);
+  outline: none;
+  width: 140px;
+}
+
+.btn-apply-clarification {
+  padding: 6px 12px;
+  background: #16a34a;
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Bottom Chat Input Bar */
+.chat-input-bar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border-top: 1px solid #f3f4f6;
+  padding-top: 12px;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  font-size: 12.5px;
+  outline: none;
+}
+
+.chat-input:focus {
+  border-color: var(--blue-primary);
+}
+
+.btn-send-chat {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: var(--navy-button);
+  color: #ffffff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   3. Right Workspace Panel: Browser & Values Review (Matches screenshot)
+   ========================================================================== */
+.coworker-right-panel {
+  flex: 1.15;
+  background-color: var(--bg-page);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  min-width: 380px;
+}
+
+/* Upper Card: "Your portal workspace" */
+.workspace-card {
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  min-height: 220px;
+}
+
+.workspace-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #f3f4f6;
+  padding-bottom: 8px;
+}
+
+.workspace-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.workspace-badge {
+  font-size: 11px;
+  font-weight: 600;
+  background: #f1f5f9;
+  color: var(--text-muted);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.workspace-badge.active {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.workspace-standby-view {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.workspace-standby-text {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 280px;
+}
+
+/* Live Browser inside Workspace Card */
+.live-browser-frame {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+
+.browser-mini-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8fafc;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+}
+
+.browser-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dot.red {
+  background: #ef4444;
+}
+
+.dot.yellow {
+  background: #f59e0b;
+}
+
+.dot.green {
+  background: #10b981;
+}
+
+.browser-url-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.browser-form-content {
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  background: #ffffff;
+  position: relative;
+}
+
+.portal-form-header {
+  margin-bottom: 12px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 8px;
+}
+
+.portal-badge-new {
+  font-size: 10px;
+  font-weight: 700;
+  color: #2563eb;
+  background: #eff6ff;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.portal-form-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 3px;
+}
+
+.portal-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.field-row {
+  display: flex;
+  gap: 10px;
+}
+
+.field-row.two-col>.field-item {
+  flex: 1;
+}
+
+.field-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  position: relative;
+  width: 100%;
+}
+
+.field-lbl {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.p-input,
+.p-textarea {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  transition: all 0.15s ease;
+}
+
+.p-textarea {
+  height: 42px;
+  resize: none;
+}
+
+.field-item.typing .p-input,
+.field-item.typing .p-textarea {
+  border-color: #2563eb;
+  background: #eff6ff;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.field-item.filled .p-input,
+.field-item.filled .p-textarea {
+  border-color: #10b981;
+  background: #f0fdf4;
+}
+
+.f-tick {
+  position: absolute;
+  right: 8px;
+  top: 24px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #059669;
+}
+
+.field-submit-row {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.btn-portal-submit {
+  padding: 8px 12px;
+  background: #1e293b;
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: default;
+  transition: all 0.2s ease;
+}
+
+.btn-portal-submit.submitted {
+  background: #059669;
+}
+
+.portal-status-note {
+  font-size: 10.5px;
+  color: var(--text-muted);
+}
+
+/* Agent Floating Pointer */
+.portal-cursor {
+  position: absolute;
+  top: 60px;
+  left: 80px;
+  pointer-events: none;
+  z-index: 50;
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.cursor-label {
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+/* ==========================================================================
+   Lower Card: "Values to review" (Matches screenshot)
+   ========================================================================== */
+.values-review-card {
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.review-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.review-bullet-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.review-bullet-list li {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  position: relative;
+  padding-left: 14px;
+}
+
+.review-bullet-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.review-bullet-list li strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.review-footer-note {
+  font-size: 11px;
+  color: var(--text-muted);
+  border-top: 1px solid #f3f4f6;
+  padding-top: 10px;
+  line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .coworker-layout {
+    flex-direction: column;
+  }
+
+  .coworker-sidebar {
+    width: 100%;
+    flex-direction: row;
+    height: 56px;
+  }
+}

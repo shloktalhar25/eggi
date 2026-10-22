@@ -1,0 +1,26 @@
+i want to create a web app where in we are going to split window in 2 sides , one where we can uoload our document and another one would be to run a browser inside where in the agent which is configured will scapre(prase) the data from the document and then then agent would automatically register the website form using browser automation on next half () 
+
+attach image
+
+
+So the 1st box , when a user uploads his document (details pdf for addmission process) , their would be certaim steps which we can show on portal itself like(1.extract values from pdf) 2. validatTe the inforamtions 3. setup new contract.. 4. autofill the form
+5 verfify after form filling.
+
+now from once the information is ectarcted from the pdf and validated in step 2.  Then from step 3 the browser shall open and then the auto form filling process shoudl take place . also we want to show the how agent is automating the form filling by showing the browerr proegiing. 
+
+
+
+
+step1. Data extraction from pdf form feilds and make sure they are ready for filling the form
+tip: if you encounter a step where the information is not clear or lacking the here is where we can come up by manually asking for that 
+this comes in step 2 where the data is validated and made sure the data which is extracted dost not cause any error in future. Ex : the phone number is only 9 numbers instrae of 10.
+then we may promot the use and then ask them for thri input manually.
+
+Remember that only unclear information should be aksed and avoid by asking everyhting
+
+
+now comes the agent part:
+
+1. The agent would be able to think and help in form filling process 
+2 . create this codeabase in a seperate folder 'Agent' and then write the code inside it 
+3. agent and llm should be able to 
